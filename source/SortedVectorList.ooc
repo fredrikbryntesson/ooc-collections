@@ -17,53 +17,31 @@
 
 import VectorList
 import Vector
+// Se om jag kan intiera den med init(funktionspekare) och sedan ha en utan
+// argument init() som jag kan köra super i.
 SortedVectorList: class <T> extends  VectorList<T>{
+//SortedVectorList: class <T> {
+	_compareValuesFunctionPointer : Func (Cell<T>, Cell<T>) -> Bool
+
+	//init: func (f: Func (Cell<T>, Cell<T>) -> Bool) {
+	//init: func (input: Int) {
 	init: func () {
+		//("Input is " + input toString()) println()
 		super()
 	}
 
-	printAnything: func <T> (value: T) {
-		match T {
-			case Int =>
-				value as Int toString() println()
-			case =>
-				"<unknown>" println()
-		}
-	}
+	readCompareValuesFunctionPointer: func (f: Func (Cell<T>, Cell<T>) -> Bool) {
+		this  _compareValuesFunctionPointer = f
 
+	}
 
 	add: func (item: T) {
-		if(this count < 1) {
-			this _vector[this count] = item
-			this count += 1
-		}
-		else {
-			this _vector[this count] = item
-			//sort()
-			this count += 1
+		super()
+		this _sortVectorList()
 
-		}
 	}
 
-	sort: func (f: Func (T, T) -> Bool) {
 
-		// felet är att vi jämför två olika T, det kanske inte går, vill ha dom till ints: if(this _vector[j] > this _vector[j+1]) {
-
-		bol := f(1,300)
-		("the bool is " + bol toString()) println()
-		temporary: T
-		for (i in 0..this count-1) {
-			for(j in 0..this count-1) {
-				printAnything(this _vector[j])
-				if(this _vector[j] > this _vector[j+1]) {
-					("swaps j is " + j toString()) println()
-					temporary = this _vector[j+1]
-					this _vector[j] = this _vector[j + 1]
-					this _vector[j + 1] = temporary
-				}
-			}
-		}
-	}
 /*
 	remove: func ~last -> T {
 		super()
@@ -80,6 +58,24 @@ SortedVectorList: class <T> extends  VectorList<T>{
 	}
 
 */
+
+	_sortVectorList: func () {
+		compareValuesFunction := this _compareValuesFunctionPointer //as Func (Cell<Yt>,Cell<Int>) -> Bool
+		firstValue := Cell new(this _vector[0])
+		secondValue := Cell new(this _vector[1])
+		temporary: T
+		for (i in 0..this count-1) {
+			for(j in 0..this count-1) {
+				firstValue = Cell new(this _vector[j])
+				secondValue = Cell new(this _vector[j+1])
+				if(compareValuesFunction(firstValue,secondValue)) {
+					temporary = this _vector[j]
+					this _vector[j] = this _vector[j + 1]
+					this _vector[j + 1] = temporary
+				}
+			}
+		}
+	}
 	operator [] (index: Int) -> T {
 		this _vector[index]
 	}

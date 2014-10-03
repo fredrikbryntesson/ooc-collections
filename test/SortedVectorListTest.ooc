@@ -20,7 +20,6 @@ use ooc-collections
 
 SortedVectorTest: class extends Fixture {
 
-
 	init: func() {
 		super("SortedVectorList")
 		this add("SortedVectorList cover create", func() {
@@ -28,40 +27,46 @@ SortedVectorTest: class extends Fixture {
 
 			//sortedVectorList := SortedVectorList<Int> new(32) as SortedVectorList<Int>
 			sortedVectorList := SortedVectorList<Int> new() as SortedVectorList<Int>
+			//sortedVectorList := SortedVectorList<Cell<Int>> new() as SortedVectorList<Cell<Int>>
+
+			//sortedVectorList := SortedVectorList<Int> new(55) as SortedVectorList<Int>
+			//sortedVectorList := SortedVectorList<Int> new(compareValues as Func (Cell<Int>, Cell<Int>) -> Bool) as SortedVectorList<Int>
+			sortedVectorList readCompareValuesFunctionPointer(compareValues)
+
 
 			"----" println()
-			sortedVectorList[0] = 6
+			/*
+			cell := Cell new(6)
+			sortedVectorList[0] = cell
+			cell = Cell new(9)
+			sortedVectorList[1] = cell
+			cell = Cell new(2)
+			sortedVectorList[2] = cell
+			cell = Cell new(8)
+			sortedVectorList[3] = cell
+			*/
+			/*sortedVectorList[0] = 6
 			sortedVectorList[1] = 9
 			sortedVectorList[2] = 2
-			sortedVectorList[3] = 8
-			length := 4
+			sortedVectorList3] = 8*/
+
+			sortedVectorList add(6)
+			sortedVectorList add(9)
+			sortedVectorList add(2)
+			sortedVectorList add(8)
+			sortedVectorList add(3)
+			length := 5
 			for (i in 0..length)
 				sortedVectorList[i] toString() println()
+				//sortedVectorList[i][Int] toString() println()
 
 			sortedVectorList count = length
 
-			sortedVectorList sort(compareValues)
-
-
-/*
-			temporary: Int
-			for (i in 0..sortedVectorList count-1) {
-				for(j in 0..sortedVectorList count-1) {
-					if(sortedVectorList[j] > sortedVectorList[j+1]) {
-						("swaps j is " + j toString()) println()
-						temporary = sortedVectorList[j]
-						("temporary is " + temporary toString()) println()
-						sortedVectorList[j] = sortedVectorList[j + 1]
-						sortedVectorList[j + 1] = temporary
-					}
-				}
-			}
-*/
-
-			//sortedVectorList sort()
+			//sortedVectorList sortNew()
 			"----" println()
 			for (i in 0..length)
 				sortedVectorList[i] toString() println()
+				//sortedVectorList[i][Int] toString() println()
 			/*
 			("count " + sortedVectorList count toString()) println()
 			sortedVectorList add(1)
@@ -88,11 +93,12 @@ SortedVectorTest: class extends Fixture {
 
 		})
 	}
-	compareValues := func (firstValue: Int, secondValue: Int) -> Bool {
-		firstValue < secondValue
 
+	compareValues := func (firstValue: Cell<Int>, secondValue: Cell<Int>) -> Bool {
+		first := firstValue[Int]
+		second := secondValue[Int]
+		first > second
 	}
-
 
 }
 SortedVectorTest new() run()
