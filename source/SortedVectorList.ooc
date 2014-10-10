@@ -17,50 +17,38 @@
 
 import VectorList
 import Vector
-// Se om jag kan intiera den med init(funktionspekare) och sedan ha en utan
-// argument init() som jag kan köra super i.
+
 SortedVectorList: class <T> extends  VectorList<T>{
-//SortedVectorList: class <T> {
 	_compareValuesFunctionPointer : Func (Cell<T>, Cell<T>) -> Bool
 
 	//init: func (f: Func (Cell<T>, Cell<T>) -> Bool) {
-	//init: func (input: Int) {
 	init: func () {
-		//("Input is " + input toString()) println()
 		super()
 	}
 
 	readCompareValuesFunctionPointer: func (f: Func (Cell<T>, Cell<T>) -> Bool) {
 		this  _compareValuesFunctionPointer = f
-
 	}
 
 	add: func (item: T) {
 		super()
 		this _sortVectorList()
-
 	}
 
-
-/*
 	remove: func ~last -> T {
 		super()
 	}
 
 	insert: func (index: Int, item: T) {
-		super()
-		sort()
-
+		add(item)
 	}
+
 	remove: func (index: Int) -> T {
 		super()
-		sort()
 	}
 
-*/
-
 	_sortVectorList: func () {
-		compareValuesFunction := this _compareValuesFunctionPointer //as Func (Cell<Yt>,Cell<Int>) -> Bool
+		compareValuesFunction := this _compareValuesFunctionPointer
 		firstValue := Cell new(this _vector[0])
 		secondValue := Cell new(this _vector[1])
 		temporary: T
@@ -76,11 +64,12 @@ SortedVectorList: class <T> extends  VectorList<T>{
 			}
 		}
 	}
+
 	operator [] (index: Int) -> T {
 		this _vector[index]
 	}
+	
 	operator []= (index: Int, item: T) {
 		this _vector[index] = item
 	}
-
 }

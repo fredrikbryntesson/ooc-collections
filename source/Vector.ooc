@@ -98,6 +98,14 @@ HeapVector: class <T> extends Vector<T> {
 		super()
 		gc_free(this _backend)
 	}
+
+	operator [] (index: Int) -> T {
+		this _backend[index]
+	}
+
+	operator []= (index: Int, item: T) {
+		this _backend[index] = item
+	}
 }
 
 StackVector: class <T> extends Vector<T> {
@@ -113,5 +121,13 @@ StackVector: class <T> extends Vector<T> {
 		if (count > this count)
 			count = this count
 		super(count)
+	}
+
+	operator [] (index: Int) -> T {
+		this _backend[index]
+	}
+
+	operator []= (index: Int, item: T) {
+		this _backend[index] = item
 	}
 }

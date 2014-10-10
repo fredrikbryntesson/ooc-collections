@@ -25,72 +25,48 @@ SortedVectorTest: class extends Fixture {
 		this add("SortedVectorList cover create", func() {
 
 
-			//sortedVectorList := SortedVectorList<Int> new(32) as SortedVectorList<Int>
 			sortedVectorList := SortedVectorList<Int> new() as SortedVectorList<Int>
-			//sortedVectorList := SortedVectorList<Cell<Int>> new() as SortedVectorList<Cell<Int>>
-
-			//sortedVectorList := SortedVectorList<Int> new(55) as SortedVectorList<Int>
-			//sortedVectorList := SortedVectorList<Int> new(compareValues as Func (Cell<Int>, Cell<Int>) -> Bool) as SortedVectorList<Int>
 			sortedVectorList readCompareValuesFunctionPointer(compareValues)
-
-
-			"----" println()
-			/*
-			cell := Cell new(6)
-			sortedVectorList[0] = cell
-			cell = Cell new(9)
-			sortedVectorList[1] = cell
-			cell = Cell new(2)
-			sortedVectorList[2] = cell
-			cell = Cell new(8)
-			sortedVectorList[3] = cell
-			*/
-			/*sortedVectorList[0] = 6
-			sortedVectorList[1] = 9
-			sortedVectorList[2] = 2
-			sortedVectorList3] = 8*/
-
+			expect(sortedVectorList count, is equal to(0))
 			sortedVectorList add(6)
 			sortedVectorList add(9)
 			sortedVectorList add(2)
-			sortedVectorList add(8)
-			sortedVectorList add(3)
-			length := 5
-			for (i in 0..length)
-				sortedVectorList[i] toString() println()
-				//sortedVectorList[i][Int] toString() println()
-
-			sortedVectorList count = length
-
-			//sortedVectorList sortNew()
-			"----" println()
-			for (i in 0..length)
-				sortedVectorList[i] toString() println()
-				//sortedVectorList[i][Int] toString() println()
-			/*
-			("count " + sortedVectorList count toString()) println()
+			sortedVectorList add(5)
 			sortedVectorList add(1)
-			for (i in 0..sortedVectorList count)
-				sortedVectorList[i] toString() println()
-			sortedVectorList add(8)
-			for (i in 0..sortedVectorList count)
-				sortedVectorList[i] toString() println()
 			sortedVectorList add(3)
+			sortedVectorList add(7)
+			sortedVectorList add(8)
+			sortedVectorList add(0)
+			sortedVectorList add(4)
+			expect(sortedVectorList count, is equal to(10))
 			for (i in 0..sortedVectorList count)
-				sortedVectorList[i] toString() println()
-			("count " + sortedVectorList count toString()) println()
+				expect(sortedVectorList[i]  < i+1)
+
+			sortedVectorList remove()
+			sortedVectorList remove()
+			sortedVectorList remove()
+			sortedVectorList remove()
+			expect(sortedVectorList count, is equal to(6))
 			for (i in 0..sortedVectorList count)
-				sortedVectorList[i] toString() println()
-				*/
+				expect(sortedVectorList[i]  < i+1)
 
-			//sortedVectorList[i] toString() println()
 
-			//vectorList := VectorList<Int> new() as VectorList<Int>
-			//vectorList add(4)
-			//vectorList[i] toString() println()
+			sortedVectorList add(6)
+			sortedVectorList add(8)
+			sortedVectorList add(7)
+			expect(sortedVectorList count, is equal to(9))
+			for (i in 0..sortedVectorList count)
+				expect(sortedVectorList[i]  < i+1)
 
-			//expect(sortedVectorList count, is equal to(0))
+			sortedVectorList remove(5)
+			expect(sortedVectorList count, is equal to(8))
+			for (i in 0..sortedVectorList count)
+				expect(sortedVectorList[i]  < i+1)
 
+			sortedVectorList insert(3, 6)
+			expect(sortedVectorList count, is equal to(9))
+			for (i in 0..sortedVectorList count)
+				expect(sortedVectorList[i]  < i+1)
 		})
 	}
 
@@ -99,6 +75,5 @@ SortedVectorTest: class extends Fixture {
 		second := secondValue[Int]
 		first > second
 	}
-
 }
 SortedVectorTest new() run()
